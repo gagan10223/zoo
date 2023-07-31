@@ -10,7 +10,7 @@ class animal
     string name;
     int age;
     double weight;
-    bool fed{true};
+    bool fed{false};
 
     public:
     // constructor
@@ -40,7 +40,7 @@ class animal
     }
     virtual void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
     virtual void makeSound() const
     {
@@ -79,7 +79,7 @@ class Dog: public animal
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class Tiger: public animal
@@ -110,7 +110,7 @@ class Tiger: public animal
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class Lion: public animal
@@ -141,7 +141,7 @@ class Lion: public animal
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class Elephant: public animal
@@ -171,7 +171,7 @@ class Elephant: public animal
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class Giraffe: public animal
@@ -201,7 +201,7 @@ class Giraffe: public animal
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class Dolphin: public animal
@@ -231,7 +231,7 @@ class Dolphin: public animal
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class bird: public animal
@@ -261,7 +261,7 @@ class bird: public animal
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class eagle: public bird
@@ -292,7 +292,7 @@ class eagle: public bird
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 class baldeagle: public eagle
@@ -324,7 +324,7 @@ class baldeagle: public eagle
     }
     void amifed() const
     {
-        cout << "Am i fed ?"<< fed <<endl;
+        cout << "Am i fed ?"<< (fed ? "true": "false") <<endl;
     }
 };
 
@@ -342,6 +342,7 @@ class zoo
     
     void remove_animal(string input)
     {
+        bool animal_found = false;
         for(auto it = animals.begin(); it != animals.end(); ++it)
         {
             if((*it)->get_name() == input)
@@ -349,22 +350,50 @@ class zoo
                 delete *it;
                 animals.erase(it);
                 cout<< "Animal removed succesfully"<<endl;
+                animal_found = true;
                 break;
             }
             cout<< "Animal did not find"<<endl;
         }
+        if(!animal_found)
+        {
+            cout<<"Animal did not found" <<endl;
+        }
     }
     void feeding(string input)
     {
+        bool animal_found = false;
         for(auto it = animals.begin(); it != animals.end(); ++it)
         {
             if((*it)->get_name() == input)
             {
                 (*it)->setfed(true);
                 cout<< "Animal fed succesfully"<<endl;
+                animal_found = true;
                 break;
             }
-            cout<<"Animal did not found" <<endl;
+        }
+        if(!animal_found)
+        {
+             cout<<"Animal did not found" <<endl;
+        }
+    }
+    void show_description(string input)
+    {
+        bool animal_found = false;
+        for(auto it = animals.begin(); it != animals.end(); ++it)
+        {
+            if((*it)->get_name() == input)
+            {
+                (*it)->animal_description();
+                (*it)->amifed();
+                animal_found = true;
+                break;
+            }
+        }
+        if(!animal_found)
+        {
+            cout<<"Animal did not found"<<endl;
         }
     }
 
